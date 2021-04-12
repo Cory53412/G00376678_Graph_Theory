@@ -5,17 +5,17 @@ def shunt(infix):
      postfix = ""
      stack  = ""
     # declaring special operators and their priority in the stack
-     specials = {'*':50, '/':40, '+':30, '-':20}    
+     specials = {'*':100 , '.':90, '|':80}   
     # Loop through the input a character at a time.
      for c in infix:
         # c is a digit.
-        if c in {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}:
+        if c in {'a', 'b'}:
             # Push it to the output.
             postfix = postfix + c
         # c is an operator.
-        elif c in {'+', '-', '*', '/'}:
+        elif c in {'*','.','|'}:
             # Check what is on the stack.
-             while len(stack) > 0 and stack[-1] != '(' and specials[stack[-1]] > specials[c]:
+             while len(stack) > 0 and stack[-1] != '(' and specials[stack[-1]] >= specials[c]:
                 # Append operator at top of stack to output.
                 postfix = postfix + stack[-1]
                 # Remove operator from stack.
@@ -46,7 +46,7 @@ def shunt(infix):
 #checks if ive been running it as a script , if so run these tests
 #if it is imported to another script dont run
 if __name__ == "__main__":
-    for infix in ["3+4*(2-1)", "1+2+3+4+5*6", "(1+2)*(4*(6-7))"]:
+    for infix in ["a.(b.b)*.a"]:
         print(f"infix:   {infix}")
         print(f"postfix: {shunt(infix)}")
         print()
