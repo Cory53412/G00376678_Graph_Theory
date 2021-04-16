@@ -23,19 +23,23 @@ Special character meanings:
 * ?-Question mark is the match one or more quantifier
 * *-Asterisk is the match zero or more quantifier
 * +-Plus is the match one or more quantifier
+* <>- Smaller and greater signs are anchors that specify a left or right word boundary
 * ()-Opening and closing parentheses are used for grouping characters.
 * {}-Opening and closing curly brackets are used as range quantifiers
 * []-Opening and closing square brackets define a character class to match a single character
 
 If you were to match a character having special meaning you need to use an escape sequence prefix with a backslash E.g \. matches "." or \+ matches "+".
 
+Regular Expressions consist of constraints, which denote sets of strings and operator symbols that denote operations over these sets. Given a finite alphabet Σ, the following constants are defined as regular expressions:
+
+* Empty set-∅ denoting the set ∅.
+* Empty string- ε denoting the set containing only the "empty" string, which has no characters at all
+* Literal character -  ε denoting the set containing only the "empty" string, which has no characters at all
+* Kleene star - R* denotes the smallest superset of the set described by R that contains ε and is closed under string concatenation.
+* Concatenation-(RS) denotes the set of strings that can be obtained by concatenating a string accepted by R and a string accepted by S.
+* Alternation-(R|S) denotes the set union of sets described by R and S.
 
 
-
-
-* <>- Smaller and greater signs are anchors that specify a left or right word boundary
-
-
-## how do regukar expressions differ across implementations?
+## how do regular expressions differ across implementations?
 
 ## Can all formal languages be encoded as regular expressions?
