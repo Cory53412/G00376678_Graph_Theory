@@ -3,15 +3,15 @@ An application written in python3 to search a text file using a regular expressi
 
 ##Instructions
 To run the applications you need:
-*Have python installed nd set up on your machine
-*CLone the repo to your machine
-*Have a script editor like Visual code
-*RUn application from cmd using command 'python regex.py'
+* Have python installed nd set up on your machine
+* CLone the repo to your machine
+* Have a script editor like Visual code
+* RUn application from cmd using command 'python regex.py'
 
-##Explanation of the algorithem
+## Explanation of the algorithem
 
-##What is a regular expression?
+## What is a regular expression?
 
-##how do regukar expressions differ across implementations?
+## how do regukar expressions differ across implementations?
 
-##Can all formal languages be encoded as regular expressions?
+## Can all formal languages be encoded as regular expressions?
