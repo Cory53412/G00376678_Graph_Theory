@@ -7,11 +7,11 @@ def shunt(infix):
     """Convert infix expressions to postfix."""
     postfix , stack = "", ""
     # declaring special operators and their priority in the stack
-    specials = {'*': 100, '/': 90, '+': 80, '.': 70, '|': 60}  
+    specials = {'*': 100, '+': 80, '.': 70, '|': 60}  
     # Loop through the input a character at a time.
     for c in infix:
         # c is an operator.
-        if c in {'*','/','+', '.', '|'}:
+        if c in {'*','+', '.', '|'}:
             # Check what is on the stack.
             while len(stack) > 0 and stack[-1] != '(' and specials[stack[-1]] >= specials[c]:
                 # Append operator at top of stack to output.

@@ -1,8 +1,15 @@
 # Author: Cory O'Donoghue
 # Graph Theory Project
-# Reference Dr.Ian McLoughlin https://web.microsoftstream.com/video/4012d43a-bb46-4ceb-8aa9-2ae598539a32
+# Reference Dr.Ian McLoughlin https://web.microsoftstream.com/video/4012d43a-bb46-4ceb-8aa9-2ae598539a32 for original thomspons construction video 2021
+# Reference Dr.ian McLoughlin https://web.microsoftstream.com/video/f4bc3634-b94f-4c15-b2c1-70cccd874c54?list=user&userId=20b32719-41e8-4560-9f7f-c83ba751229c for matching & small changes to thompsons construction 2020
+#Once I had completed all of your labs and began trying to implement my user functions calling match() from menu file, I was repeatedly gettin an error which was
+"""==========Error ==========
+previous = self.start.followes()
+AttributeError: 'str' object has no attribute start"""
+#I then watched back your video from the previous year where I took the match(), and added minor changes to the thompson which staright away worked with my function
 
-from shuntingre import *
+
+from shuntingre import shunt
 
 class State:
     """A state and its arrows in Thompson's construction."""
@@ -17,30 +24,30 @@ class State:
 
 
 class NFA:
-    """An automaton"""
-    def __init__(self, start, end):
+   """A non-deterministic finite automaton."""
+   def __init__(self, start, end):
         #Start state of the automaton.
         self.start = start
         self.end = end
 
-    def match(regex, s):
-    #Compile omto NFA
+   def match(regex,s):
+        #Compile onto NFA
         nfa = re_to_nfa(regex)
 
-    #Match the string to the text file string(s)
-    #Current states
+       # Try to match the regular expression to the string s
+       # The Current set of states
         current = set()
         followes(nfa.start, current)
-    #Previous states
+       #Previous set of states
         previous = set()
 
-    #Loof through characters
+        #Loop through characters in s
         for c in s:
-        #state we are in
+        #Keep track of where we were
             previous = current
-        #create a new state
+         # Create a new empty set for states we're about to be in.
             current = set()
-        #Loop previous state
+        #Loop through previous state
             for state in previous:
             #Follow arrows
                 if state.label is not None:
@@ -48,17 +55,18 @@ class NFA:
                     if state.label == c:
                 #add at end of arrow to current state
                         followes(state.arrows[0], current)
+
     #return the output
         return nfa.end in current
 
-
+#Add a state to set and follow all e arrows
 def followes(state, current):
      if state not in current:
-       #Current state
+       #Put state into current
         current.add(state)
        #State label check
         if state.label is None:
-            #loop through
+            #loop through states pointed by this one
             for x in state.arrows:
                 #call result
                 followes(x, current)
@@ -74,7 +82,7 @@ def re_to_nfa(infix):
         c = postfix.pop()
         # Concatenation.
         if c == '.':
-            # Pop top NFA off stack.
+          # Pop top NFA off stack.
             nfa2 = stack[-1]
             stack = stack[:-1]
             # Pop the next NFA off stack.
@@ -96,23 +104,23 @@ def re_to_nfa(infix):
             nfa1 = stack[-1]
             stack = stack[:-1]
             # Create new start and end states.
-            #start = State(None, [], False)
+            start = State(None, [], False)
             end = State(None, [], True)
             # Make new start state point at old start states.
             start.arrows.append(nfa1.start)
             start.arrows.append(nfa2.start)
             # Make old end states non-accept.
-            #nfa1.end.accept = False
-            #nfa2.end.accept = False
+            nfa1.end.accept = False
+            nfa2.end.accept = False
             # Point old end states to new one.
-            nfa2.end.arrows.append(end)
             nfa1.end.arrows.append(end)
+            nfa2.end.arrows.append(end)
             # Make a new NFA.
-            nfa = NFA(nfa2.start, nfa1.end)
+            nfa = NFA(start, end)
             # Push to the stack.
             stack.append(nfa)
         elif c == '*':
-            # Pop one NFA off stack.
+          # Pop one NFA off stack.
             nfa1 = stack[-1]
             stack = stack[:-1]
             # Create new start and end states.
@@ -133,11 +141,15 @@ def re_to_nfa(infix):
             # Push to the stack.
             stack.append(nfa)
         elif c == '+':
+             #Pop one NFA off stack
             nfa1 = stack[-1]
             stack = stack[:-1]
+            #Create new start and end state
             start = State(None, [], False)
             end = State(None, [], True)
+            #Make new start point at old start state
             start.arrows.append(nfa1.start)
+            #and at the new end state
             nfa1.end.arrows.append(end)
             # Make old end state point to old start state.
             nfa1.end.arrows.append(nfa1.start)
@@ -158,8 +170,7 @@ def re_to_nfa(infix):
             nfa = NFA(start, end)
             # Append the NFA to the NFA stack.
             stack.append(nfa)
-        #newNFA = NFA(start, end)
-        #stack.append(newNFA)
+        
     # There should only be one NFA on the stack.
     return stack.pop()
 

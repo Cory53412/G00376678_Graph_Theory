@@ -7,11 +7,9 @@ def user_input():
     stringEntry = list(input("Please enter a list or single string: ").split()) 
     print_Input(infixEntry, stringEntry)
 
-# def file_input():
-
 def infix_Examples():
-    infixes = ["a.b.c*", "a.(b|d).c*", "(a.(b|d))*", "a.(b.b)*.c", "a.b.c+"]
-    strings = ["", "abc", "abbc", "abcc", "abad", "abbbc", "ab"]
+    infixes = ["a.b.a*", "a.(b.b)*.a", "a.b.b+"]
+    strings = [ "aba", "abba", "abaa", "abb"]
     print_Input(infixes, strings)
 
 def print_Input(infixes, strings):
@@ -19,7 +17,7 @@ def print_Input(infixes, strings):
     for i in infixes:
         print()
         for s in strings:
-            print("Infix: %-17s String: %-17s Result: %-5s" % (i, s, additional.NFA.match(i, s)))
+            print("Infix: %-17s String: %-17s Result: %-5s" % (i, s, thompsonConstruction.NFA.match(i, s)))
 
 userAnswer=True
 while userAnswer:
