@@ -3,8 +3,6 @@
 # Reference Dr.Ian McLoughlin https://web.microsoftstream.com/video/85152016-d320-4bbe-bfff-48baebcd59a6
 
 
-
-
 def shunt(infix):
     """Convert infix expressions to postfix."""
     postfix , stack = "", ""

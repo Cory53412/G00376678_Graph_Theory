@@ -2,6 +2,8 @@
 # Graph Theory Project
 # Reference Dr.Ian McLoughlin https://web.microsoftstream.com/video/4012d43a-bb46-4ceb-8aa9-2ae598539a32
 
+from shuntingre import *
+
 class State:
     """A state and its arrows in Thompson's construction."""
     def __init__(self, label, arrows, accept):
@@ -12,52 +14,64 @@ class State:
         self.label = label
         self.arrows = arrows
         self.accept = accept
-    
-    #Add a state to a set and follow all of the e arrows
-    def followes(self):
-        """The set of states that are gotten from following this state
-           and all its e arrows."""
-        # Include this state in the returned set.
-        states = {self}
-        # If this state has e arrows, i.e. label is None.
-        if self.label is None:
-            # Loop through this state's arrows.
-            for state in self.arrows:
-                # Incorporate that state's earrow states in states.
-                states = (states | state.followes())
-        # Returns the set of states.    
-        return states
+
 
 class NFA:
-    """A non-deterministic finite automaton."""
+    """An automaton"""
     def __init__(self, start, end):
+        #Start state of the automaton.
         self.start = start
         self.end = end
 
-    def match(self, s):
-        """Return True iff this NFA (instance) matches the string s."""
-        # A list of previous states that we are still in.
-        previous = self.start.followes()
-        # Loop through the string, a character at a time.
-        for c in s:
-            # Start with an empty set of current states.
-            current = set()
-            # Loop throuth the previous states.
-            for state in previous:
-                # Check if there is a c arrow from state.
-                if state.label == c:
-                    # Add followes for next state.
-                    current = (current | state.arrows[0].followes())
-            # Replace previous with current.
-            previous = current
-        # If the final state is in previous, then return True. False otherwise. 
-        return (self.end in previous)
+    def match(regex, s):
+    #Compile omto NFA
+        nfa = re_to_nfa(regex)
 
-def re_to_nfa(postfix):
+    #Match the string to the text file string(s)
+    #Current states
+        current = set()
+        followes(nfa.start, current)
+    #Previous states
+        previous = set()
+
+    #Loof through characters
+        for c in s:
+        #state we are in
+            previous = current
+        #create a new state
+            current = set()
+        #Loop previous state
+            for state in previous:
+            #Follow arrows
+                if state.label is not None:
+                #See if it is equal
+                    if state.label == c:
+                #add at end of arrow to current state
+                        followes(state.arrows[0], current)
+    #return the output
+        return nfa.end in current
+
+
+def followes(state, current):
+     if state not in current:
+       #Current state
+        current.add(state)
+       #State label check
+        if state.label is None:
+            #loop through
+            for x in state.arrows:
+                #call result
+                followes(x, current)
+
+
+def re_to_nfa(infix):
     # A stack for NFAs.
+    postfix = shunt(infix)
+    postfix = list(postfix)[::-1]
     stack = []
     # Loop through the postfix r.e. left to right.
-    for c in postfix:
+    while postfix:
+        c = postfix.pop()
         # Concatenation.
         if c == '.':
             # Pop top NFA off stack.
@@ -82,19 +96,19 @@ def re_to_nfa(postfix):
             nfa1 = stack[-1]
             stack = stack[:-1]
             # Create new start and end states.
-            start = State(None, [], False)
+            #start = State(None, [], False)
             end = State(None, [], True)
             # Make new start state point at old start states.
             start.arrows.append(nfa1.start)
             start.arrows.append(nfa2.start)
             # Make old end states non-accept.
-            nfa1.end.accept = False
-            nfa2.end.accept = False
+            #nfa1.end.accept = False
+            #nfa2.end.accept = False
             # Point old end states to new one.
-            nfa1.end.arrows.append(end)
             nfa2.end.arrows.append(end)
+            nfa1.end.arrows.append(end)
             # Make a new NFA.
-            nfa = NFA(start, end)
+            nfa = NFA(nfa2.start, nfa1.end)
             # Push to the stack.
             stack.append(nfa)
         elif c == '*':
@@ -119,15 +133,11 @@ def re_to_nfa(postfix):
             # Push to the stack.
             stack.append(nfa)
         elif c == '+':
-            #Pop one NFA off stack
             nfa1 = stack[-1]
             stack = stack[:-1]
-            #Create new start and end state
             start = State(None, [], False)
             end = State(None, [], True)
-            #Make new start point at old start state
             start.arrows.append(nfa1.start)
-            #and at the new end state
             nfa1.end.arrows.append(end)
             # Make old end state point to old start state.
             nfa1.end.arrows.append(nfa1.start)
@@ -135,25 +145,7 @@ def re_to_nfa(postfix):
             nfa = NFA(start, end)
             # Push to the stack.
             stack.append(nfa)
-        elif c == '/':
-             #Pop one NFA off stack
-            nfa1 = stack[-1]
-            stack = stack[:-1]
-            #Create new start and end state
-            start = State(None, [], False)
-            end = State(None, [], True)
-            # Make new start state point at old start state.
-            start.arrows.append(nfa1.start)
-            # And at the new end state.
-            start.arrows.append(end)
-            # Make old end state non-accept.
-            #nfa1.end.accept = False
-            nfa1.end.arrows.append(end)
-            #nfa1.end.arrows.append(nfa1.start)
-            # Make a new NFA.
-            nfa = NFA(start, end)
-            # Push to the stack.
-            stack.append(nfa)
+        
         else:
             # Create an NFA for the non-special character c.
             # Create the end state.
@@ -166,14 +158,10 @@ def re_to_nfa(postfix):
             nfa = NFA(start, end)
             # Append the NFA to the NFA stack.
             stack.append(nfa)
-    
+        #newNFA = NFA(start, end)
+        #stack.append(newNFA)
     # There should only be one NFA on the stack.
-    if len(stack) != 1:
-        return None
-    else:
-        return stack[0]
-
-
+    return stack.pop()
 
 if __name__ == "__main__":
     for postfix in ["abb.*.a.", "100.*.1.", 'ab|']:
