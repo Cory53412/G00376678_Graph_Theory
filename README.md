@@ -16,15 +16,14 @@ When the application has been ran using the command 'python menu.py' a menu with
 2) It allows the user to enter their own regular expression followed by a string they want to match.
 3) Lets the user enter in a file directory for regular expressions and a file directory for string comparisons.
 4) Exit the program.
-#### Option 1
-
-#### Option 2
-
-#### Option 3
-
-#### Option 4
-
-
+#### Option 1 example
+![](Test_Files/Images/InfixExamples.PNG)
+#### Option 2 example
+![](Test_Files/Images/User_input.PNG)
+#### Option 3 example
+![](Test_Files/Images/File_input.PNG)
+#### Option 4 example
+![](Test_Files/Images/exit.PNG)
 
 ## Explanation of the algorithem
 #### Converting infix to postifx using Shunting Yard algorithem (shunt function)
