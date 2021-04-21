@@ -35,7 +35,6 @@ def shunt(infix):
         else:
             # Push it to the output.
             postfix = postfix + c
-
     # Empty the operator stack.
     while len(stack) != 0:
         # Append operator at top of stack to output.

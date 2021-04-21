@@ -46,7 +46,7 @@ def file_Input():
 
 def infix_Examples():
     #array of infixes & strings
-    infixes = ["a.b.a*", "a.(b.b)*.a", "a.b.b+"]
+    infixes = ["a.b.a**", "a.(b.b)*.a", "a.b.b+"]
     strings = [ "aba", "abba", "abaa", "abb"]
 
     #loop through infix array
