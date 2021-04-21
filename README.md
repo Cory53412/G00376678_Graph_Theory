@@ -1,4 +1,5 @@
-## G00376678_Graph_Theory
+## Cory O'Donoghue
+## G00376678
 An application written in python3 to search a text file using a regular expression. This program takes a regular expression and the name or path of the file as command line arguments and output the lines of the file matching the regular expression.
 
 ## Instructions
@@ -8,6 +9,22 @@ To run the application:
 * cd into G00376678_Graph_Theory
 * Have a script editor like Visual Studio code
 * Run application from cmd using command 'python menu.py'
+
+## User Guide
+When the application has been ran using the command 'python menu.py' a menu with 4 options will be displayed to the user
+1) It gives them the option to view some examples of regular expressions.
+2) It allows the user to enter their own regular expression followed by a string they want to match.
+3) Lets the user enter in a file directory for regular expressions and a file directory for string comparisons.
+4) Exit the program.
+#### Option 1
+
+#### Option 2
+
+#### Option 3
+
+#### Option 4
+
+
 
 ## Explanation of the algorithem
 #### Converting infix to postifx using Shunting Yard algorithem (shunt function)
@@ -27,7 +44,6 @@ To convert an infix expression into a postfix expression we use a stack to hold 
 Once the shunting yard algorithem has created the postfix notation, we use an alogrithem called thompsons construction which iterates through the postfix expression. It checks for each operator (* + . |) and creates a small NFA to add to the overall stack. These work by setting up inital and accept states using NFA class and constructor. I discuss how these operators work briefly further down.
 [Add image below]
 
-
 #### Match() function
 This function converts the infix expression into a postfix and checks if the regular expression matches the given string of text. It gets the postfix by calling re_to_nfa(). It then creates a current set of states and a previous set of states. Afterwards looping through the states and follows e arrows of the curent state.
 This is implemented using the followes function which is talked about below. For each character in the string iterate through the current set to check if the set contains the character, if so, add the next states you could travel to. At the end if the current set contains the accept state then it returns true, if not then returns false and the string doesn’t match the NFA.
@@ -38,19 +54,19 @@ This function takes in the current state and the state to be checked. It ensures
 
 ## UI Functions
 #### Infix_Examples()
-This function displays a list of previosuly tested regular expressions and their matching strings.
+This function displays several regular expressions, possible matching strings and their NFA result. A nested for loop goes through the array of infixes and strings passing each of them through to match() function and printing the output to console.
 
 #### User_Input()
 This function asks the user to enter a regular expression, once theyve enter their regex then the program asks the user to enter a string. The function will then return a message to the user telling stating if the two entires match or not.
 
 #### File_Input()
-This function asks the user to enter a directory of a file they wish to read consisting of infix values, the user will then be asked to repeat the previous task but enter a file directory for strings.
+This function asks the user to enter a directory of a file they wish to read consisting of infix values which the contents of will be printed to screen, the user will then be asked to repeat the previous task but enter a file directory for strings which the contnets of will also be printed to screen. The program will then run through a nested for loop printing the infix, string and the NFA result.
 
 ## What is a regular expression?
 Regular expression originated in 1951, a mathematition Stephen Cole Kleene described regular languages using his mathematical notation called regular events. A regular expression which can be shortened to regex is a string of text that allows you to create patterns that help match, locate, and manage text. These strings are compared to this pattern to see if they fit the pattern defined by the expression. Regex is a combination of two types of characters, literals and special characters. These charcters define the logical pattern. Literals are all charcters except those with special meanings. In total there are twelve charcters with special meanings. These are '\' , '^', '$' , '.' , '|' , '?' , '*' , '+' , '(' , ')' '{' '[]' 
 
 Special character meanings:
-* \-Backslash escape charcter
+* \ -Backslash escape charcter
 * ^-Carpet is the anchor for start of the string
 * $-The dollar sign is the anchor for the end of the string
 * .-The dot matches any charcter except newline symbol 

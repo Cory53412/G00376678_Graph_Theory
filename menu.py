@@ -40,13 +40,19 @@ def file_Input():
     print(s_contents)
     #close file
     infix.close()
-    #printing matching strings
-    print_Input(i_contents, s_contents)
+    
+     #loop through i_contents
+    for i in i_contents:
+        print()
+        #loop through s_contents
+        for s in s_contents:
+            #print i, s and boolean from match function
+            print("Infix: %-15s String: %-10s Result: %-5s" % (i, s, thompsonConstruction.NFA.match(i, s)))
   
 
 def infix_Examples():
     #array of infixes & strings
-    infixes = ["a.b.a**", "a.(b.b)*.a", "a.b.b+"]
+    infixes = ["a.b.a*", "a.(b.b)*.a", "a.b.b+"]
     strings = [ "aba", "abba", "abaa", "abb"]
 
     #loop through infix array
@@ -73,7 +79,7 @@ while userAnswer:
         file_Input()
     #if user selects 4, close the program
     elif userAnswer == "4":
-        print("\nClosing program") 
+        print("\nLeaving program") 
         userAnswer = False
     else:
         print("\nThat was not an option, Please try again")
