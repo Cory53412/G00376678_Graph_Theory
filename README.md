@@ -11,7 +11,8 @@ To run the application:
 
 ## Explanation of the algorithem
 #### Converting infix to postifx using Shunting Yard algorithem (shunt function)
-To convert an infix expression into a postfix expression we use a stack to hold the operators and reverse their order in the expression. All the operands are printed when they are read. Below are the rules to handle operators and parantheses which you can find here along with examples from [The Departments of Mathematics and Computer Science] (http://mathcenter.oxford.emory.edu/site/cs171/shuntingYardAlgorithm/).
+To convert an infix expression into a postfix expression we use a stack to hold the operators and reverse their order in the expression. All the operands are printed when they are read. Below are the rules to handle operators and parantheses which you can find here along with examples from 
+[The Departments of Mathematics and Computer Science](http://mathcenter.oxford.emory.edu/site/cs171/shuntingYardAlgorithm/).
 * If the incoming symbols is an operand, print it..
 * If the incoming symbol is a left parenthesis, push it on the stack.
 * If the incoming symbol is a right parenthesis: discard the right parenthesis, pop and print the stack symbols until you see a left parenthesis. Pop the left parenthesis and discard it.
