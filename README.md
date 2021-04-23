@@ -90,6 +90,37 @@ Regular Expressions consist of constraints, which denote sets of strings and ope
 * Alternation-(R|S) denotes the set union of sets described by R and S.
 
 
-## how do regular expressions differ across implementations?
+## How do regular expressions differ across implementations?
+Regular expressions can be implemented as either a Deterministic Finite Automaton (DFA) or a Non-Deterministic Finite Automaton (NFA). The NFA engine is more frequently used in tools such as .Net languages, PHP, Ruby, Perl, Python. However DFA engines are found in almost all versions of egrep and awk.
+Both engines are capable of converting an NFA to a DFA and vice versa but they are not same.
+Three main differences between DFA and NFA are:
+1) 
+* DFA: If we pass any symbol in DFA, it can have a transition from the current state to only one other state which satisfies the condition, i.e it can be one state at a time
+* NFA: If we pass any symbol, it can have a transition to multiple states, all those states which satisfies the condition, i.e it can be multiple states at the same time
+2)
+* In DFA we cannot use empty string transition i.e we can not use epsilon to go from one state to another
+* In NFA we can use empty string transition i.e we use epsilon to move from one state to a different state or from one state to multiple states
+3)
+* DFA requires more space
+* NFA requires less space
+
+
+DFA and NFA both have a set of five tuples however both are represeneted differently
+Deterministic Finite Automaton are represented as:
+Q: A non empty finite set of states present in the finite control(qo, q1, q2, …). 
+Σ: A non empty finite set of input symbols. 
+δ: It is a transition function that takes two arguments, a state and an input symbol, it returns a single state. 
+qo: It is starting state, one of the state in Q. 
+F: It is non-empty set of final states/ accepting states from the set belonging to Q. 
+
+Non-Deterministic Finite Automaton are represented as:
+Q: A set of non empty finite states. 
+Σ: A set of non empty finite input symbols. 
+δ: It is a transition function that takes a state from Q and an input symbol from and returns a subset of Q. 
+qo: Initial state of NFA and member of Q. 
+F: A non-empty set of final states and member of Q. 
+
+
 
 ## Can all formal languages be encoded as regular expressions?
+A formal langugae consists of a set of strings drawn from a finite alphabet and are formed to a specific set of rules. This alphabet is formed of symbols(operators) and letters(operands)  and the specified set of rules can be from regular expression.
