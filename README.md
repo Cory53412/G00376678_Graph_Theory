@@ -128,6 +128,7 @@ A formal language consists of a set of strings drawn from a finite alphabet and 
 ## Research
 #### Shunting Yard 
 In week 6 of the course I was introduced to the Shunting Yard Algorithm, to ensure I fully understood the algorithm, as the concept of the stack and its various operator precedence was still not quite clear to me. I ended up discovering a very useful  [video](https://www.youtube.com/watch?v=HJOnJU77EUs)  that went about explaining it in a simple and effective approach. Between the lecture content and and tutorial I had a solid grasp of the algorithm and attempted to take on the second half of the pseudo code pulled from google, however I was not successful in completing the algorithm. The following week Dr Ian mcloughlin completed the code which afterwards I  wrote out a list of infix expressions and their corresponding postfix expression which later tested to check if they were correct.
+
 ![](Images/InfixExamples.PNG)
 
 #### More Regular Expressions and Starting Thompsons Construction
