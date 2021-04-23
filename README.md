@@ -17,17 +17,17 @@ When the application has been ran using the command 'python menu.py' a menu with
 3) Lets the user enter in a file directory for regular expressions and a file directory for string comparisons.
 4) Exit the program.
 #### Option 1 example
-![](Test_Files/Images/InfixExamples.PNG)
+![](Images/InfixExamples.PNG)
 #### Option 2 example
-![](Test_Files/Images/User_input.PNG)
+![](Images/User_input.PNG)
 #### Option 3 example
-![](Test_Files/Images/File_input.PNG)
+![](Images/File_input.PNG)
 #### Option 4 example
-![](Test_Files/Images/exit.PNG)
+![](Images/exit.PNG)
 
-## Explanation of the algorithem
-#### Converting infix to postifx using Shunting Yard algorithem (shunt function)
-To convert an infix expression into a postfix expression we use a stack to hold the operators and reverse their order in the expression. All the operands are printed when they are read. Below are the rules to handle operators and parantheses which you can find here along with examples from 
+## Explanation of the algorithm
+#### Converting infix to postifx using Shunting Yard algorithm (shunt function)
+To convert an infix expression into a postfix expression we use a stack to hold the operators and reverse their order in the expression. All the operands are printed when they are read. Below are the rules to handle operators and parentheses which you can find here along with examples from 
 [The Departments of Mathematics and Computer Science](http://mathcenter.oxford.emory.edu/site/cs171/shuntingYardAlgorithm/).
 * If the incoming symbols is an operand, print it..
 * If the incoming symbol is a left parenthesis, push it on the stack.
@@ -39,12 +39,12 @@ To convert an infix expression into a postfix expression we use a stack to hold 
 [Add image below]
 
 
-#### Creating an NFA using Thompsons Construction Algorithem (re_to_nfa function)
-Once the shunting yard algorithem has created the postfix notation, we use an alogrithem called thompsons construction which iterates through the postfix expression. It checks for each operator (* + . |) and creates a small NFA to add to the overall stack. These work by setting up inital and accept states using NFA class and constructor. I discuss how these operators work briefly further down.
+#### Creating an NFA using Thompsons Construction Algorithm (re_to_nfa function)
+Once the shunting yard algorithm has created the postfix notation, we use an algorithm called thompsons construction which iterates through the postfix expression. It checks for each operator (* + . |) and creates a small NFA to add to the overall stack. These work by setting up initial and accept states using NFA class and constructor. I discuss how these operators work briefly further down.
 [Add image below]
 
 #### Match() function
-This function converts the infix expression into a postfix and checks if the regular expression matches the given string of text. It gets the postfix by calling re_to_nfa(). It then creates a current set of states and a previous set of states. Afterwards looping through the states and follows e arrows of the curent state.
+This function converts the infix expression into a postfix and checks if the regular expression matches the given string of text. It gets the postfix by calling re_to_nfa(). It then creates a current set of states and a previous set of states. Afterwards looping through the states and follows e arrows of the current state.
 This is implemented using the followes function which is talked about below. For each character in the string iterate through the current set to check if the set contains the character, if so, add the next states you could travel to. At the end if the current set contains the accept state then it returns true, if not then returns false and the string doesn’t match the NFA.
 [Add image below]
 
@@ -56,20 +56,20 @@ This function takes in the current state and the state to be checked. It ensures
 This function displays several regular expressions, possible matching strings and their NFA result. A nested for loop goes through the array of infixes and strings passing each of them through to match() function and printing the output to console.
 
 #### User_Input()
-This function asks the user to enter a regular expression, once theyve enter their regex then the program asks the user to enter a string. The function will then return a message to the user telling stating if the two entires match or not.
+This function asks the user to enter a regular expression, once they've enter their regex then the program asks the user to enter a string. The function will then return a message to the user telling stating if the two entries match or not.
 
 #### File_Input()
-This function asks the user to enter a directory of a file they wish to read consisting of infix values which the contents of will be printed to screen, the user will then be asked to repeat the previous task but enter a file directory for strings which the contnets of will also be printed to screen. The program will then run through a nested for loop printing the infix, string and the NFA result.
+This function asks the user to enter a directory of a file they wish to read consisting of infix values which the contents of will be printed to screen, the user will then be asked to repeat the previous task but enter a file directory for strings which the contents of will also be printed to screen. The program will then run through a nested for loop printing the infix, string and the NFA result.
 
 ## What is a regular expression?
-Regular expression originated in 1951, a mathematition Stephen Cole Kleene described regular languages using his mathematical notation called regular events. A regular expression which can be shortened to regex is a string of text that allows you to create patterns that help match, locate, and manage text. These strings are compared to this pattern to see if they fit the pattern defined by the expression. Regex is a combination of two types of characters, literals and special characters. These charcters define the logical pattern. Literals are all charcters except those with special meanings. In total there are twelve charcters with special meanings. These are '\' , '^', '$' , '.' , '|' , '?' , '*' , '+' , '(' , ')' '{' '[]' 
+Regular expression originated in 1951, a mathematician Stephen Cole Kleene described regular languages using his mathematical notation called regular events. A regular expression which can be shortened to regex is a string of text that allows you to create patterns that help match, locate, and manage text. These strings are compared to this pattern to see if they fit the pattern defined by the expression. Regex is a combination of two types of characters, literals and special characters. These characters define the logical pattern. Literals are all characters except those with special meanings. In total there are twelve characters with special meanings. These are '\' , '^', '$' , '.' , '|' , '?' , '*' , '+' , '(' , ')' '{' '[]' 
 
 Special character meanings:
-* \ -Backslash escape charcter
+* \ -Backslash escape characters
 * ^-Carpet is the anchor for start of the string
 * $-The dollar sign is the anchor for the end of the string
-* .-The dot matches any charcter except newline symbol 
-* |-Seperates a series of alternatives
+* .-The dot matches any character except newline symbol 
+* |-Separates a series of alternatives
 * ?-Question mark is the match one or more quantifier
 * *-Asterisk is the match zero or more quantifier
 * +-Plus is the match one or more quantifier
@@ -85,7 +85,7 @@ Regular Expressions consist of constraints, which denote sets of strings and ope
 * Empty set-∅ denoting the set ∅.
 * Empty string- ε denoting the set containing only the "empty" string, which has no characters at all
 * Literal character -  ε denoting the set containing only the "empty" string, which has no characters at all
-* Kleene star - R* denotes the smallest superset of the set described by R that contains ε and is closed under string concatenation.
+* Kleene star - R* denotes the smallest super set of the set described by R that contains ε and is closed under string concatenation.
 * Concatenation-(RS) denotes the set of strings that can be obtained by concatenating a string accepted by R and a string accepted by S.
 * Alternation-(R|S) denotes the set union of sets described by R and S.
 
@@ -105,7 +105,7 @@ Three main differences between DFA and NFA are:
 * NFA requires less space
 
 
-DFA and NFA both have a set of five tuples however both are represeneted differently
+DFA and NFA both have a set of five tuples however both are represented differently
 Deterministic Finite Automaton are represented as:
 Q: A non empty finite set of states present in the finite control(qo, q1, q2, …). 
 Σ: A non empty finite set of input symbols. 
@@ -123,4 +123,19 @@ F: A non-empty set of final states and member of Q.
 
 
 ## Can all formal languages be encoded as regular expressions?
-A formal langugae consists of a set of strings drawn from a finite alphabet and are formed to a specific set of rules. This alphabet is formed of symbols(operators) and letters(operands)  and the specified set of rules can be from regular expression.
+A formal language consists of a set of strings drawn from a finite alphabet and are formed to a specific set of rules. This alphabet is formed of symbols(operators) and letters(operands)  and the specified set of rules can be from regular expression.
+
+## Research
+#### Shunting Yard 
+In week 6 of the course I was introduced to the Shunting Yard Algorithm, to ensure I fully understood the algorithm, as the concept of the stack and its various operator precedence was still not quite clear to me. I ended up discovering a very useful  [video](https://www.youtube.com/watch?v=HJOnJU77EUs)  that went about explaining it in a simple and effective approach. Between the lecture content and and tutorial I had a solid grasp of the algorithm and attempted to take on the second half of the pseudo code pulled from google, however I was not successful in completing the algorithm. The following week Dr Ian mcloughlin completed the code which afterwards I  wrote out a list of infix expressions and their corresponding postfix expression which later tested to check if they were correct.
+![](Images/InfixExamples.PNG)
+
+#### More Regular Expressions and Starting Thompsons Construction
+In week 8 we expanded on regular expression operators, began learning about thompsons construction and adapted the previous weeks Shunting Yard algorithm to the new operands which were concatenation: '.',the or: '/', and the kleene star: '*'.  I followed the same technique as the previous week of writing out my own infix to postfix examples to see if my expected result was correct. At the start, thompsons construction was not quite clicking in my head, where following the arrows in the kleene star was leading to new start and accept states and back towards the old start and accept states. This took several reads and videos to grasp, which also lead me to discover DFA's which gave me a better understanding of content later in the course. The most useful I found was this [tutorial](https://www.youtube.com/watch?v=RYNN-tb9WxI) on youtube.
+
+#### Implememnting THompsons Construction in Code
+In week 9 we implemented thompsons construction in code. After taking time to get a better grasp of what thompsons construction does and how it creates an NFA in the previous week I had a decent understanding of what was happening. I firstly just followed the lab watching the video trying to understand as best as I could. I then attempted to complete the lab myself reverting the lab video when I needed assistance. 
+
+#### Match Function()
+In week 12 we created a match function in the NFA class. I originally followed the lecture video implementing the match function as shown which worked fine. However as I began to try and create my own functions from the menu file, when i was calling the match function it simply would not work. I was repeatedly getting the same error finding no useful help online. So i went and re-watched your labs from the previous year. That year there was a different approach to creating the match function witch I tried, requiring to make some small changes to my Thomposns Algorithm also. The new approach worked enabling me to carry on with the project and successfully finish off the user and file functions.
+
