@@ -62,7 +62,7 @@ This function asks the user to enter a regular expression, once they've enter th
 This function asks the user to enter a directory of a file they wish to read consisting of infix values which the contents of will be printed to screen, the user will then be asked to repeat the previous task but enter a file directory for strings which the contents of will also be printed to screen. The program will then run through a nested for loop printing the infix, string and the NFA result.
 
 ## What is a regular expression?
-Regular expression originated in 1951, a mathematician Stephen Cole Kleene described regular languages using his mathematical notation called regular events. A regular expression which can be shortened to regex is a string of text that allows you to create patterns that help match, locate, and manage text. These strings are compared to this pattern to see if they fit the pattern defined by the expression. Regex is a combination of two types of characters, literals and special characters. These characters define the logical pattern. Literals are all characters except those with special meanings. In total there are twelve characters with special meanings. These are '\' , '^', '$' , '.' , '|' , '?' , '*' , '+' , '(' , ')' '{' '[]' 
+Regular expression originated in 1951, a mathematician Stephen Cole Kleene described regular languages using his mathematical notation called regular events. A regular expression which can be shortened to regex is a string of text that allows you to create patterns that help match, locate, and manage text. These strings are compared to this pattern to see if they fit the pattern defined by the expression. Regex is a combination of two types of characters, literals and special characters. These characters define the logical pattern. Literals are all characters except those with special meanings. In total there are twelve characters with special meanings. These are '\' , '^', '$' , '.' , '|' , '?' , '*' , '+' , '(' , ')' '{' '[]'
 
 Special character meanings:
 * \ -Backslash escape characters
@@ -81,7 +81,6 @@ Special character meanings:
 If you were to match a character having special meaning you need to use an escape sequence prefix with a backslash E.g \. matches "." or \+ matches "+".
 
 Regular Expressions consist of constraints, which denote sets of strings and operator symbols that denote operations over these sets. Given a finite alphabet Σ, the following constants are defined as regular expressions:
-
 * Empty set-∅ denoting the set ∅.
 * Empty string- ε denoting the set containing only the "empty" string, which has no characters at all
 * Literal character -  ε denoting the set containing only the "empty" string, which has no characters at all
@@ -91,43 +90,24 @@ Regular Expressions consist of constraints, which denote sets of strings and ope
 
 
 ## How do regular expressions differ across implementations?
-Regular expressions can be implemented as either a Deterministic Finite Automaton (DFA) or a Non-Deterministic Finite Automaton (NFA). The NFA engine is more frequently used in tools such as .Net languages, PHP, Ruby, Perl, Python. However DFA engines are found in almost all versions of egrep and awk.
-Both engines are capable of converting an NFA to a DFA and vice versa but they are not same.
-Three main differences between DFA and NFA are:
-1) 
-* DFA: If we pass any symbol in DFA, it can have a transition from the current state to only one other state which satisfies the condition, i.e it can be one state at a time
-* NFA: If we pass any symbol, it can have a transition to multiple states, all those states which satisfies the condition, i.e it can be multiple states at the same time
-2)
-* In DFA we cannot use empty string transition i.e we can not use epsilon to go from one state to another
-* In NFA we can use empty string transition i.e we use epsilon to move from one state to a different state or from one state to multiple states
-3)
-* DFA requires more space
-* NFA requires less space
+Regular expression can differ across implementation throughout all programming languages such as Python, JavaScript, Java, C#, PHP and more. Every language will use an engine for regex which can be either a Deterministic Finite Automaton (DFA) or a Non-Deterministic Finite Automaton (NFA). 
 
+Between the engine and the programming language the regex syntax varies across languages. This is because each language supports slightly different variations when it comes to how they process, as well as what certain special charcter sequences mean. A common difference we in languages see is how these special characters are escaped/interpreted.
 
-DFA and NFA both have a set of five tuples however both are represented differently
-Deterministic Finite Automaton are represented as:
-Q: A non empty finite set of states present in the finite control(qo, q1, q2, …). 
-Σ: A non empty finite set of input symbols. 
-δ: It is a transition function that takes two arguments, a state and an input symbol, it returns a single state. 
-qo: It is starting state, one of the state in Q. 
-F: It is non-empty set of final states/ accepting states from the set belonging to Q. 
-
-Non-Deterministic Finite Automaton are represented as:
-Q: A set of non empty finite states. 
-Σ: A set of non empty finite input symbols. 
-δ: It is a transition function that takes a state from Q and an input symbol from and returns a subset of Q. 
-qo: Initial state of NFA and member of Q. 
-F: A non-empty set of final states and member of Q. 
-
+For example two languages where regular expression differs when implemented would be between Python and JavaScript Both programming languages have different regex flavours, this term "flavour" refers to the regex engine which includes the syntax and properties supported by this engine. Pythons regex flavour is the built in re-module where as JavaScripts flavour is part of the ECMA-262. A large difference between the two would be that Python supports unicode where as JavaScript doesn't.
 
 
 ## Can all formal languages be encoded as regular expressions?
-A formal language consists of a set of strings drawn from a finite alphabet and are formed to a specific set of rules. This alphabet is formed of symbols(operators) and letters(operands)  and the specified set of rules can be from regular expression.
+A formal language consists of symbols, letters and tokens that concatenate into strings of the language.This alphabet is formed of symbols(operators) and letters(operands) and are well formed according to a specific set of rules .
+
+A regular expression which is shortened as regex or regexp is a sequence of characters that specifies a search pattern. These patterns are used by string searching algorithms like Shunting Yard Algorithm or thompsons construction and can often be used as the set of rules required for formal langauges.
+
+
 
 ## Research
 #### Shunting Yard 
 In week 6 of the course I was introduced to the Shunting Yard Algorithm, to ensure I fully understood the algorithm, as the concept of the stack and its various operator precedence was still not quite clear to me. I ended up discovering a very useful  [video](https://www.youtube.com/watch?v=HJOnJU77EUs)  that went about explaining it in a simple and effective approach. Between the lecture content and and tutorial I had a solid grasp of the algorithm and attempted to take on the second half of the pseudo code pulled from google, however I was not successful in completing the algorithm. The following week Dr Ian mcloughlin completed the code which afterwards I  wrote out a list of infix expressions and their corresponding postfix expression which later tested to check if they were correct.
+
 ![](Images/InfixExamples.PNG)
 
 #### More Regular Expressions and Starting Thompsons Construction
@@ -139,3 +119,11 @@ In week 9 we implemented thompsons construction in code. After taking time to ge
 #### Match Function()
 In week 12 we created a match function in the NFA class. I originally followed the lecture video implementing the match function as shown which worked fine. However as I began to try and create my own functions from the menu file, when i was calling the match function it simply would not work. I was repeatedly getting the same error finding no useful help online. So i went and re-watched your labs from the previous year. That year there was a different approach to creating the match function witch I tried, requiring to make some small changes to my Thomposns Algorithm also. The new approach worked enabling me to carry on with the project and successfully finish off the user and file functions.
 
+#### Answering the questions
+Q1: When trying to find the answers to question 1, I went to the [regular expression docs](https://docs.python.org/3/library/re.html) which was a great source for explaining the operators in detail along with operands. 
+
+
+## Resources
+Shunting Yard tutorial:https://www.youtube.com/watch?v=HJOnJU77EUs
+Thompsons Construction tutorial:https://www.youtube.com/watch?v=RYNN-tb9WxI
+Regular Expression: https://docs.python.org/3/library/re.html
