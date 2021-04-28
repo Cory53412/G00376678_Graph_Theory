@@ -128,10 +128,14 @@ Q3: Research for this question was not easy, I struggled to find any resources t
 ## Resources
 #### Project Resources
 Shunting Yard Algorithm tutorial:https://www.youtube.com/watch?v=HJOnJU77EUs
+
 Shunting Yard Algorithm from department of Mathematics and Computer Science :http://mathcenter.oxford.emory.edu/site/cs171/shuntingYardAlgorithm
+
 Thompsons Construction tutorial:https://www.youtube.com/watch?v=RYNN-tb9WxI
+
 Dr Ian McLoughlins match function 2020: https://web.microsoftstream.com/video/f4bc3634-b94f-4c15-b2c1-70cccd874c54?list=user&userId=20b32719-41e8-4560-9f7f-c83ba751229c
 
 #### READ.ME Question Resources 
 Regular Expression: https://docs.python.org/3/library/re.html
+
 DFA's & NFA's: https://www.geeksforgeeks.org/difference-between-dfa-and-nfa/
